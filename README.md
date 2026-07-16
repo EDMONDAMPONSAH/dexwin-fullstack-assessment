@@ -48,7 +48,7 @@ Use this structure for each finding, or an equivalent structure containing the s
 
 | Layer    | Technology                  |
 |----------|-----------------------------|
-| Frontend | React 18 + Vite             |
+| Frontend | React 18 + Vite + TypeScript |
 | Backend  | Spring Boot 3, Spring Data JPA |
 | Database | PostgreSQL 16               |
 
@@ -134,13 +134,19 @@ npm install
 npm run dev
 ```
 
-The app is served at `http://localhost:5173`. It calls the backend at `http://localhost:8080` (configured in `frontend/src/api/client.js`).
+The app is served at `http://localhost:5173`. It calls the backend at `http://localhost:8080` (configured in `frontend/src/api/client.ts`).
 
 ### Troubleshooting
 
 - **Reset the database:** `docker compose down -v` then bring it back up.
 - **Backend can't connect (local run):** make sure PostgreSQL is running and reachable *before* starting the backend.
 - **Ports 8080 / 5173 already in use:** stop whatever is using them (or a previous run of this app) first.
+- **Frontend dependency changes not showing up in Docker:** the frontend container keeps
+  `node_modules` in an anonymous volume (`- /app/node_modules` in `docker-compose.yml`) so restarts
+  don't need a fresh `npm install`. That volume persists across container recreation, so after
+  changing `frontend/package.json` a plain `docker compose up --build` can still run against the
+  *old* `node_modules`. Force it to pick up new dependencies with `docker compose up --build -V`
+  (renews anonymous volumes) or `docker compose down -v && docker compose up --build`.
 
 ## API overview
 

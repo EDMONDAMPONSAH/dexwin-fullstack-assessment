@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getProjects } from '../api/client.js';
+import { getProjects } from '../api/client';
 
 export default function ProjectList({ selectedProjectId, onSelect }) {
   const [projects, setProjects] = useState([]);

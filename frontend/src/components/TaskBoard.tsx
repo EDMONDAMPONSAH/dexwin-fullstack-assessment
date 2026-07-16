@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getTasks, updateTaskStatus } from '../api/client.js';
-import TaskItem from './TaskItem.jsx';
+import { getTasks, updateTaskStatus } from '../api/client';
+import TaskItem from './TaskItem';
 
 export default function TaskBoard({ projectId }) {
   const [tasks, setTasks] = useState([]);

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ProjectList from './components/ProjectList.jsx';
-import TaskBoard from './components/TaskBoard.jsx';
+import ProjectList from './components/ProjectList';
+import TaskBoard from './components/TaskBoard';
 
 export default function App() {
   const [selectedProjectId, setSelectedProjectId] = useState(null);
